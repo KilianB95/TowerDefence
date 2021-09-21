@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    public Transform target;
-    public float range = 1.5f;
+    private Transform target;
+    public float range = 2f;
 
     public string enemyTag = "Enemy";
 
+    public Transform PartToRotate;
+    public float turnSpeed = 2f;
+
      void Start()
      {
-        InvokeRepeating("UpdateTarget", 0f, 0.5f); 
+        InvokeRepeating("UpdateTarget", 0.0f, 0.5f); 
      }
 
     void UpdateTarget()
@@ -22,7 +25,7 @@ public class Tower : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < shortestDistance)
             {
                 shortestDistance = distanceToEnemy;
@@ -39,14 +42,19 @@ public class Tower : MonoBehaviour
             target = null;
         }
     }
-
+    public Transform targer; 
 
      void Update()
      {
         if (target == null)
-        {
+        
             return;
-        }
+        Vector3 relativePos = target.position - transform.position;
+
+        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.forward);
+        transform.rotation = rotation;
+        
+        
      }
 
      void OnDrawGizmosSelected()
