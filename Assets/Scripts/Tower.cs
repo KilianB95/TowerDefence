@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     private Transform target;
+
     public float range = 2f;
 
     public string enemyTag = "Enemy";
@@ -12,9 +13,11 @@ public class Tower : MonoBehaviour
     public Transform PartToRotate;
     public float turnSpeed = 2f;
 
+    public GameObject BulletPrefab;
+
      void Start()
      {
-        InvokeRepeating("UpdateTarget", 0.0f, 0.5f); 
+        InvokeRepeating("UpdateTarget", 0.0f, 0.5f);
      }
 
     void UpdateTarget()
@@ -30,6 +33,7 @@ public class Tower : MonoBehaviour
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
+                Shoot();
             }
         }
         
@@ -42,18 +46,20 @@ public class Tower : MonoBehaviour
             target = null;
         }
     }
-    public Transform targer; 
+    void Shoot()
+    {
+        if (target)
+        {
+            GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
+            bullet.GetComponent<Bullet>().target = target.gameObject;
+        }
+        
+    }
 
      void Update()
      {
-        if (target == null)
-        
-            return;
-        Vector3 relativePos = target.position - transform.position;
 
-        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.forward);
-        transform.rotation = rotation;
-        
+        transform.LookAt(target, Vector3.left);
         
      }
 
