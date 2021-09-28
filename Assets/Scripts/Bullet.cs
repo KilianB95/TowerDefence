@@ -18,9 +18,7 @@ public class Bullet : MonoBehaviour
     {
         if (target)
         {
-            
-            Vector3.MoveTowards(transform.position, target.transform.position, 0.0f);
-            transform.position += target.transform.position * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         }
         
     }

@@ -58,7 +58,6 @@ public class Tower : MonoBehaviour
 
      void Update()
      {
-
         transform.LookAt(target, Vector3.left);
         
      }
