@@ -6,6 +6,9 @@ public class HealthBar : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
+    public GameObject enemy;
+    public int BulletDmg = 10;
+
 
     public EnemyHealthBar healthBar;
 
@@ -18,15 +21,15 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+       
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Bullet")
         {
-            TakeDamage(20);
+            maxHealth = maxHealth - BulletDmg;
+            Debug.Log("hit");
         }
     }
-    void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
 
-        healthBar.SetHealth(currentHealth);
-    }
 }
