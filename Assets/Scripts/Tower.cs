@@ -52,6 +52,7 @@ public class Tower : MonoBehaviour
         {
             GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
             bullet.GetComponent<Bullet>().target = target.gameObject;
+            
         }
         
     }
