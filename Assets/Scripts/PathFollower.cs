@@ -43,6 +43,7 @@ public class PathFollower : MonoBehaviour
 
     private void PathComplete()
     {
-
+        _speed = 0;
+        
     }
 }
