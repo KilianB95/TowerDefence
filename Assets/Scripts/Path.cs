@@ -8,6 +8,7 @@ public class Path : MonoBehaviour
     
     public Waypoints GetPathStart()
     {
+        Debug.Log(_waypoints.Length);
         return _waypoints[0];
     }
 
@@ -25,6 +26,6 @@ public class Path : MonoBehaviour
                 return _waypoints[i + 1];
             }
         }
-        return _waypoints[0];
+        return null;
     }
 }

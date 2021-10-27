@@ -59,7 +59,18 @@ public class Tower : MonoBehaviour
 
      void Update()
      {
-        transform.LookAt(target, Vector3.left);
+        // Vector3 dir = target.transform.position - transform.position;
+        // Quaternion LookAt = Quaternion.LookRotation(dir);
+
+        //Quaternion LookAtOnly_Z = Quaternion.Euler(transform.eulerAngles.x, transform.rotation.eulerAngles.y, LookAt.eulerAngles.z);
+        //transform.rotation = LookAtOnly_Z;
+        if (target != null)
+        {
+            //transform.right = target.position - transform.position;
+            transform.LookAt(target, Vector3.left);
+        }
+            
+
         
      }
 

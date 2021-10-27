@@ -19,12 +19,14 @@ public class PathFollower : MonoBehaviour
     {
         transform.Translate(translation: Vector3.forward * _speed * Time.deltaTime);
 
-        float distanceToWaypoints = Vector3.Distance(transform.position, _currentWaypoints.Getposition()); 
-        if(distanceToWaypoints <= _arrivalThreshold)
+        Debug.Log(_currentWaypoints);
+            float distanceToWaypoints = Vector3.Distance(transform.position, _currentWaypoints.Getposition());
+        if (distanceToWaypoints <= _arrivalThreshold)
         {
-            if(_currentWaypoints == _path.GetPathEnd())
+            if (_currentWaypoints == _path.GetPathEnd())
             {
                 PathComplete();
+
             }
             else
             {
@@ -32,18 +34,21 @@ public class PathFollower : MonoBehaviour
                 transform.LookAt(_currentWaypoints.Getposition());
             }
         }
+
     }
 
     private void SetupPath()
     {
         _path = FindObjectOfType<Path>();
         _currentWaypoints = _path.GetPathStart();
+        Debug.Log(_currentWaypoints);
         transform.LookAt(_currentWaypoints.Getposition());
     }
 
     private void PathComplete()
     {
         _speed = 0;
-        
+        Destroy(gameObject);
+
     }
 }
